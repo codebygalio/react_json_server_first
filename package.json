@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch ./server/db.json -p 9999"
+    "server": "json-server --watch ./server/db.json -p 9999 --middlewares ./server/middleware.js"
   },
   "eslintConfig": {
     "extends": [
