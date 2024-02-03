@@ -2,7 +2,7 @@
 import { useArray } from "utils"
 import React from "react"
 
-const TsReactTest = () => {
+export const ProjectListScreen = () => {
   const persons: { name: string; age: number }[] = [
     { name: "jack", age: 25 },
     { name: "ma", age: 22 }
@@ -37,4 +37,4 @@ const TsReactTest = () => {
   )
 }
 
-export default TsReactTest
+ 

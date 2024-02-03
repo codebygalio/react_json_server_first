@@ -2,6 +2,7 @@ export interface User {
     id: number;
     name: string;
     organization: string;
+    token: string;
 }
 
 interface SearchPanelProps {
@@ -12,6 +13,7 @@ interface SearchPanelProps {
     },
     setParam: (param:SearchPanelProps['param']) => void
 }
+
 export const SearchPanel = ({users,param, setParam}:SearchPanelProps) => {
     
     
