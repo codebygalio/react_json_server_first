@@ -1,3 +1,4 @@
+import { Button, Form, Input } from "antd"
 import { useAuth } from "context/auth-context"
 import { FormEvent } from "react"
 
@@ -13,21 +14,26 @@ export const RegisterScreen = () => {
     //     })
     // }
 
-    const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const username = ( event.currentTarget.elements[0] as HTMLInputElement ).value
-        const password = ( event.currentTarget.elements[1] as HTMLInputElement ).value
-        register({username, password})
+    // const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault()
+    //     const username = ( event.currentTarget.elements[0] as HTMLInputElement ).value
+    //     const password = ( event.currentTarget.elements[1] as HTMLInputElement ).value
+    //     register({username, password})
+    // }
+    const handleSubmit = (values:{username:string, password: string}) => {
+        register(values)
     }
-    return <form onSubmit={handleSubmit}>
-        <div>
-            <label htmlFor="username">用户名</label>
-            <input type="text" id={'username'} />
-        </div>
-        <div>
-            <label htmlFor="password">密码</label>
-            <input type="password" id={'password'} />
-        </div>
-        <button type={'submit'}>注册</button>
-    </form>
+    return <Form onFinish={handleSubmit}>
+        <Form.Item>
+            {/* <label htmlFor="username">用户名</label> */}
+            <Input placeholder={'用户名'} type="text" id={'username'} />
+        </Form.Item>
+        <Form.Item>
+            {/* <label htmlFor="password">密码</label> */}
+            <Input placeholder={'密码'} type="password" id={'password'} />
+        </Form.Item>
+        <Form.Item>
+        <Button htmlType={'submit'} type={'primary'}>注册</Button>
+        </Form.Item>
+    </Form>
 }
