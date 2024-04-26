@@ -42,5 +42,8 @@ export const useHttp = () => {
     const {user} = useAuth()
     return (...[endpoint, config]: Parameters<typeof http>) => http(endpoint, {...config, token: user?.token})
 }
-
+// export const useHttp = async(...[endpoint, config]: Parameters<typeof http>) => {
+//     const {user} = useAuth()
+//     return http(endpoint, {...config, token: user?.token})
+// }
 

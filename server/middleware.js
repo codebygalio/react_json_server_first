@@ -22,12 +22,10 @@ module.exports = ( req, res, next ) => {
     }
     if(reqUrl === '/me' && reqMethod === 'get'){
         return res.status(200).json({
-            user:{
                 user:{
                     name: '自定义用户名',
                     token:'123token'
                 }
-            }
         })
     }
     

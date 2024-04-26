@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export const isFalsy = (value: unknown) => (value === 0 ? true : !!value);
+export const isVoid = (value: unknown) => value === undefined || value === null || value === ''
 
 export const cleanObject = (object: object) => { 
   const result = { ...object };
   Object.keys(result).forEach((key) => {
     // @ts-ignore
     const value = object[key];
-    if (!isFalsy(value)) {
+    if (isVoid(value)) {
       // @ts-ignore
       delete result[key];
     }
@@ -24,7 +25,11 @@ export const useMount = (callback: ()=>void) => {
 
 export const useDebounce = <V>(value: V, delay?:number):V => { 
   const [ debouncedValue, setDebouncedValue ] = useState(value)
-
+  // let timer = null
+  // if (timer){ clearTimeout(timer) }
+  // timer = setTimeout(() => {
+  //   setDebouncedValue(value)
+  // }, delay )
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedValue(value)
@@ -66,3 +71,35 @@ export const useArray = <X>(initialArray:X[]) => {
     add
   }
 }
+
+export const useDocumentTitle = (title:string, keepOnUnmount:boolean=true) => {
+
+  const oldTitle = useRef(document.title).current
+  // console.log('old=',oldTitle)
+  useEffect(()=> {
+    document.title = title
+    // console.log('oldTitle上面=',oldTitle)
+  }, [])
+  useEffect(()=>{
+    return () => {
+      if(!keepOnUnmount){document.title = oldTitle}
+    }
+  },[])
+}
+
+export const resetRoute = () => window.location.href = window.location.origin
+
+
+
+export const useMountedRef = () => {
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+
+  return mountedRef;
+};
